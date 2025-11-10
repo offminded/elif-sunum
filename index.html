@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ableism Nedir?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* 1. THE SETUP */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /* Koyu gri, Twitch arayüzüne benzer */
+  background-color: #0e0e10;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px 0;
+  place-items: center;
+}
+
+.slide-container {
+  align-items: center;
+  /* Daha yumuşak bir koyu ton */
+  background-color: #18181b;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 720px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px;
+  position: relative;
+  width: 1280px;
+  /* Ana metin rengi yüksek kontrastlı */
+  color: #fafafa;
+}
+
+/* 1.1 BACKGROUND STYLING (Soyut Desen) */
+
+.slide-container::before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  /* Hafif, çizgisel bir arkaplan deseni */
+  background-image: linear-gradient(45deg, #27272a 25%, transparent 25%), linear-gradient(-45deg, #27272a 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #27272a 75%), linear-gradient(-45deg, transparent 75%, #27272a 75%);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+.slide-container>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* 2. CONSISTENT TYPOGRAPHY */
+
+/* Başlık Fontu: Poppins (Modern, Kalın) */
+
+.slide-container h1,
+.slide-container h2,
+.slide-container h3 {
+  /* Vurgu rengi: Canlı Mor */
+  color: #a78bfa;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+/* Gövde Metni Fontu: Lato (Okunaklı, Temiz) */
+
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle,
+.slide-container .number-label,
+.slide-container .chart-summary,
+.slide-container .bar .label,
+.slide-container th,
+.slide-container td,
+.slide-container .bleed-text-side p,
+.slide-container cite,
+.slide-container .qa-layout p,
+.slide-container .contact-info {
+  /* Ana metin rengi: Neredeyse beyaz */
+  color: #fafafa;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Font Boyutları */
+
+.slide-container h1 {
+  font-size: 85px;
+  text-align: center;
+}
+
+.slide-container .slide-title {
+  /* h2 */
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: left;
+  width: 100%;
+}
+
+.slide-container h3 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* Gövde metni boyutu */
+
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle {
+  font-size: 22px;
+  line-height: 1.6;
+}
+
+.slide-container .subtitle {
+  font-weight: 400;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 26px;
+  color: #a1a1aa;
+  /* Soluk gri */
+}
+
+.slide-container .content-area {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 3. LAYOUT DEFINITIONS */
+
+/* Title_Slide */
+.title-layout {
+  text-align: center;
+}
+
+/* Section_Title */
+.section-title-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.section-title-layout h2 {
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+
+.section-title-layout p {
+  font-size: 24px;
+  margin: 0 auto;
+  max-width: 800px;
+  color: #a1a1aa;
+}
+
+.section-title-layout hr {
+  background-color: #a78bfa;
+  border: none;
+  height: 5px;
+  margin: 30px auto;
+  width: 100px;
+}
+
+
+/* Highlighted_Numbers (Metin vurgusu için uyarlandı) */
+.highlight-numbers-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  position: relative; 
+}
+
+.highlight-numbers-layout .number {
+  color: #a78bfa;
+  font-size: 130px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+}
+
+.highlight-numbers-layout .number-label {
+  font-size: 50px;
+  font-weight: 700;
+  color: #fafafa;
+  margin-top: 10px;
+}
+
+.highlight-numbers-layout p {
+  font-size: 22px;
+  color: #a1a1aa;
+  margin-top: 20px;
+  max-width: 700px;
+}
+
+
+/* Image_Right_Text_Left */
+.two-column {
+  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  width: 100%;
+}
+
+.two-column ul {
+  list-style: none;
+  margin: 20px 0 0 0;
+  padding-left: 0;
+}
+
+.two-column li {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.image-wrapper {
+  border-radius: 12px;
+  height: 400px;
+  overflow: hidden;
+  width: 100%;
+  background-color: #27272a;
+}
+
+.image-wrapper img {
+  height: 100%;
+  object-fit: contain; /* 'contain' olarak değiştirildi */
+  width: 100%;
+}
+
+/* Styled_Bullet_Points */
+.bullet-list {
+  max-width: 900px;
+  width: 100%;
+}
+
+.bullet-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bullet-list li {
+  align-items: flex-start;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+  padding-left: 0;
+  position: relative;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.bullet-list i {
+  color: #a78bfa;
+  font-size: 28px;
+  margin-top: 5px;
+  text-align: center;
+  flex-shrink: 0;
+  width: 30px;
+}
+
+.bullet-list li strong {
+  color: #a78bfa;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* Tiled_Text_With_Icons */
+.tiled-content {
+  align-items: stretch;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+}
+
+.tile {
+  align-items: flex-start;
+  /* İkincil vurgu rengi */
+  background-color: #27272a;
+  border-radius: 12px;
+  border: 1px solid #3f3f46;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+  padding: 30px;
+  text-align: left;
+}
+
+.tile .icon {
+  color: #a78bfa;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.tile h3 {
+  font-size: 24px;
+  color: #fafafa;
+  /* Başlıklar beyaz */
+}
+
+.tile p {
+  font-size: 18px;
+  color: #a1a1aa;
+  /* Açıklamalar soluk gri */
+}
+
+/* Bleed_Image_Right */
+.slide-container.bleed-image-layout {
+  align-items: start;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+
+.slide-container.bleed-image-layout>.content-container {
+  padding: 60px 0 60px 60px;
+  align-self: center;
+}
+
+.slide-container.bleed-image-layout>.image-container {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slide-container.bleed-image-layout img.bleed-image-side {
+  border-radius: 0 8px 8px 0;
+  height: 100%;
+  max-width: 100%;
+  max-height: 720px;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  opacity: 0.8;
+}
+
+.slide-container.bleed-image-layout .bleed-text-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slide-container.bleed-image-layout .bleed-text-side p {
+  color: #fafafa;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+.slide-container.bleed-image-layout .slide-title {
+  margin-bottom: 20px;
+}
+
+.slide-container.bleed-image-layout .bleed-text-side h3 {
+  color: #fafafa;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+
+/* Quote_Layout */
+.quote-layout {
+  text-align: center;
+  width: 90%;
+}
+
+.quote-layout blockquote {
+  color: #fafafa;
+  font-size: 44px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.4;
+  margin: 0 0 30px 0;
+  padding: 0 40px;
+  position: relative;
+}
+
+.quote-layout blockquote::before,
+.quote-layout blockquote::after {
+  color: #a78bfa;
+  /* Vurgu rengi */
+  content: '"';
+  font-size: 100px;
+  line-height: 0;
+  position: absolute;
+  opacity: 0.5;
+}
+
+.quote-layout blockquote::before {
+  left: -10px;
+  top: 30px;
+}
+
+.quote-layout blockquote::after {
+  bottom: 10px;
+  right: -10px;
+}
+
+.quote-layout .slide-title {
+  text-align: center;
+}
+
+
+/* Q&A_Layout */
+.qa-layout {
+  text-align: center;
+  width: 100%;
+  align-self: center;
+}
+
+.qa-layout h2 {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.qa-layout p {
+  font-size: 24px;
+  color: #a1a1aa;
+}
+
+.qa-layout .contact-info {
+  color: #fafafa;
+  font-size: 22px;
+  margin-top: 40px;
+  font-weight: 700;
+}
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title_Slide -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
+        <h1>"ABLEISM" NEDİR?</h1>
+        <p class="subtitle">Engellilik Ayrımcılığını Anlamak</p>
+    </div>
+</div>
+
+<!-- Slide 2: Section_Title (Tanım için) -->
+<div class="slide-container" id="slide2">
+    <div class="section-title-layout">
+        <h2>Ableism (Engellilik Ayrımcılığı) Nedir?</h2>
+        <p>Engelli bireylere karşı ayrımcılık, önyargı veya sosyal taraflılık demektir. <br> Engelli bireyleri engelli olmayanlara göre "daha az değerli" veya "aşağı" görme eğilimidir.</p>
+    </div>
+</div>
+
+<!-- Slide 3: Highlighted_Numbers (Vurgu için) -->
+<div class="slide-container" id="slide3">
+    <div class="content-area">
+        <div class="highlight-numbers-layout">
+            <h3>Kafa Karışıklığı Olmasın</h3>
+            <div class="number">AÇIKÇA</div>
+            <div class="number-label">Ableism bir AYRIMCILIKTIR.</div>
+            <p>Bu sadece kabalık değil, bir fırsat eşitsizliği ve önyargı sistemidir.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Image_Right_Text_Left (Senaryo 1) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">Detaylı Bir Örnek: İş Görüşmesi</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <div>
+                    <p>Nitelikli, tekerlekli sandalye kullanan bir yazılım geliştiricisi işe başvurur.</p>
+                    <p style="font-style: italic; color: #a1a1aa; border-left: 3px solid #a78bfa; padding-left: 15px;">
+                        Görüşmeci: "Sizi çok isteriz, ama ofiste nasıl dolaşacağınızdan veya müşteri toplantılarına nasıl katılacağınızdan emin değilim."
+                    </p>
+                    <p><strong>Sonuç:</strong> Daha az nitelikli ancak engelli olmayan aday işe alınır.</p>
+                </div>
+            </div>
+            <div>
+                <div class="image-wrapper">
+                    <img src="https://www.shrm.org/topics-tools/employment-law-compliance/maryland-expands-employer-obligations-to-accommodate-applicants-disabilities/_jcr_content/_cq_featuredimage.coreimg.jpeg/1702839831220/disabled-job-applicant-xpidd2.jpeg" alt="Ofiste iş görüşmesi silüeti">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Styled_Bullet_Points (Analiz 1) -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">Bu Neden Ableism?</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-circle-question"></i><div><strong>Varsayımda Bulunur:</strong> Kişinin ihtiyaçlarını sormadan "yapamayacağını" varsayar.</div></li>
+                <li><i class="fa-solid fa-magnifying-glass-chart"></i><div><strong>Sınırlara Odaklanır:</strong> Becerileri yerine (algılanan) sınırlamalarına odaklanır.</div></li>
+                <li><i class="fa-solid fa-ban"></i><div><strong>Fırsatı Engeller:</strong> Yetenekleri yüzünden değil, önyargı yüzünden işi alamaz.</div></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Tiled_Text_With_Icons (Örnekler 1) -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">Gündelik Hayattan Örnekler (1)</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile"><div class="icon"><i class="fa-solid fa-building-un"></i></div><h3>Mimari Engeller</h3><p>Rampası veya asansörü olmayan binalar, erişilemeyen toplu taşıma araçları.</p></div>
+            <div class="tile"><div class="icon"><i class="fa-solid fa-desktop"></i></div><h3>Erişilemez Tasarım</h3><p>Alt yazısız videolar, ekran okuyucu uyumsuz web siteleri, küçük ve okunaksız fontlar.</p></div>
+            <div class="tile"><div class="icon"><i class="fa-solid fa-comment-slash"></i></div><h3>Ableist Dil</h3><p>"Geri zekalı", "kör müsün?", "sağır mısın?" gibi ifadeleri hakaret olarak kullanmak.</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Tiled_Text_With_Icons (Örnekler 2) -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Gündelik Hayattan Örnekler (2)</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="tile"><div class="icon"><i class="fa-solid fa-baby"></i></div><h3>Çocuklaştırma</h3><p>Engelli yetişkinlerle küçümseyici, çocuksu bir tonda konuşmak veya izinleri olmadan onlara yardım etmeye çalışmak.</p></div>
+            <div class="tile"><div class="icon"><i class="fa-solid fa-trophy"></i></div><h3>"İlham Pornosu"</h3><p>Sıradan şeyler yapan engelli bireyleri sırf engelleri var diye "ilham verici" veya "kahraman" olarak sunmak.</p></div>
+            <div class="tile"><div class="icon"><i class="fa-solid fa-eye-slash"></i></div><h3>Gizli Önyargı</h3><p>Engelli birinin yetenekli, başarılı veya bir ilişkide olmasından "şaşırmak" veya bunu "beklememek".</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Section_Title (Geçiş) -->
+<div class="slide-container" id="slide8">
+    <div class="section-title-layout">
+        <hr>
+        <h2>Peki ya "Görünürde" Engelli Olmayanlar?</h2>
+        <p>Bu durum kafa karıştırıcı olabilir. Gelin, bir senaryoya bakalım.</p>
+    </div>
+</div>
+
+<!-- Slide 9: Bleed_Image_Right (Senaryo 2) -->
+<div class="slide-container bleed-image-layout" id="slide9">
+    <div class="content-container">
+        <h2 class="slide-title">Karmaşık Bir Durum</h2>
+        <div class="content-area">
+            <div class="bleed-text-side">
+                <h3>Senaryo:</h3>
+                <p>Bir kişi, markette motorlu mobilite scooter'ı kullanan kilolu birini görüp <strong>"Tembel"</strong> veya <strong>"Gerçekten ihtiyacı yok"</strong> diye düşünüyor.</p>
+                <p>Bu bir önyargı mıdır?</p>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <img
+            class="bleed-image-side"
+            src="https://i.ibb.co/sK435kR/mobility-scooter.png"
+            alt="Markette bir mobilite scooter'ı, bulanıklaştırılmış">
+    </div>
+</div>
+
+<!-- Slide 10: Styled_Bullet_Points (Analiz 2) -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">Evet, Bu da Ableism!</h2>
+    <div class="content-area">
+        <div class="bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-user-secret"></i><div><strong>Gizli Engellilik:</strong> Birinin sağlık durumunu dışarıdan bakarak anlayamazsınız. Kronik ağrı, kalp yetmezliği veya şiddetli artrit görünmez olabilir.</div></li>
+                <li><i class="fa-solid fa-weight-scale"></i><div><strong>Kilo ve Mobilite:</strong> Fazla kilo, eklem ağrısı veya solunum zorlukları gibi meşru hareket kısıtlılıklarına neden olabilir.</div></li>
+                <li><i class="fa-solid fa-pills"></i><div><strong>Neden-Sonuç:</strong> Bazen ilaçlar veya hareket etmeyi zorlaştıran diğer engeller kilo alımına neden olabilir.</div></li>
+                <li><i class="fa-solid fa-gavel"></i><div><strong>Yargılamak Bize Düşmez:</strong> Kimin yardıma "ihtiyacı olduğuna" veya "hak ettiğine" karar vermek kimsenin haddi değildir.</div></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 11: Quote -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title" style="text-align: center;">Ana Fikir</h2>
+    <div class="content-area">
+        <div class="quote-layout">
+            <blockquote>Herkes, yargılanmadan günlük hayata katılmalarını sağlayan araçlara erişimi hak eder.</blockquote>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Section_Title (Sonuç) -->
+<div class="slide-container" id="slide12">
+    <div class="section-title-layout">
+        <h2>Sonuç: Farkında Ol, Değiştir.</h2>
+        <p>Ableism sistemik bir sorundur. Bunu hem erişilebilirlik sağlayarak hem de engelliliğe yönelik tutumlarımızı değiştirerek çözebiliriz.</p>
+    </div>
+</div>
+
+</body>
+</html>
